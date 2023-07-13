@@ -1,32 +1,52 @@
 #include QMK_KEYBOARD_H
 
-#define _DVORAK 0 // Base Dvorak layer
+enum layers {
+    DEF,
+    SYM,
+    NAV,
+    NUM,
+};
+
+// layers
+#define LA_SYM MO(SYM)
+#define LA_NAV MO(NAV)
+
+// oneshot mods
+#define OS_LSFT OSM(MOD_LSFT)
+#define OS_LALT OSM(MOD_LALT)
+#define OS_LCTL OSM(MOD_LCTL)
+#define OS_LGUI OSM(MOD_LGUI)
+#define OS_RSFT OSM(MOD_RSFT)
+#define OS_RALT OSM(MOD_RALT)
+#define OS_RCTL OSM(MOD_RCTL)
+#define OS_RGUI OSM(MOD_RGUI)
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-  [_DVORAK] = LAYOUT_pretty(
+  [DEF] = LAYOUT_pretty(
 // ,---------------------------------------------------------------------------------------------------------------------------------------------------------------------.
-    KC_CAPS , KC_F1   , KC_F2   , KC_F3   , KC_F4 , KC_F5  , KC_F6 , KC_F7 , KC_F8 , KC_F9 , KC_F10 , KC_F11 , KC_F12 , KC_PSCR , KC_SCRL , KC_PAUS , KC_NO  , QK_BOOT ,
+    KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO , KC_NO  , KC_NO , KC_NO , KC_NO , KC_NO , KC_NO , KC_NO , KC_NO , KC_NO , KC_NO , KC_NO , KC_NO  , QK_BOOT ,
 // |--------+---------+---------+---------+-------+--------+-------------------------------------------------+--------+---------+---------+---------+--------+---------|
-    KC_EQL  , KC_1    , KC_2    , KC_3    , KC_4  , KC_5   ,                                                   KC_6   , KC_7    , KC_8    , KC_9    , KC_0   , KC_MINS ,
+    KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO , KC_NO  ,                                                  KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO  , KC_NO   ,
 // |--------+---------+---------+---------+-------+--------|                                                 |--------+---------+---------+---------+--------+---------|
-    KC_TAB  , KC_QUOT , KC_COMM , KC_DOT  , KC_P  , KC_Y   ,                                                   KC_F   , KC_G    , KC_C    , KC_R    , KC_L   , KC_SLSH ,
+    KC_NO   , KC_QUOT , KC_COMM , KC_DOT  , KC_P  , KC_Y   ,                                                   KC_F   , KC_G    , KC_C    , KC_R    , KC_L   , KC_NO   ,
 // |--------+---------+---------+---------+-------+--------|                                                 |--------+---------+---------+---------+--------+---------|
-    KC_ESC  , KC_A    , KC_O    , KC_E    , KC_U  , KC_I   ,                                                   KC_D   , KC_H    , KC_T    , KC_N    , KC_S   , KC_BSLS ,
+    KC_NO   , KC_A    , KC_O    , KC_E    , KC_U  , KC_I   ,                                                   KC_D   , KC_H    , KC_T    , KC_N    , KC_S   , KC_NO   ,
 // |--------+---------+---------+---------+-------+--------|                                                 |--------+---------+---------+---------+--------+---------|
-    KC_LSFT,  KC_SCLN , KC_Q    , KC_J    , KC_K  , KC_X   ,                                                   KC_B   , KC_M    , KC_W    , KC_V    , KC_Z   , KC_RSFT ,
+    KC_NO   , KC_SCLN , KC_Q    , KC_J    , KC_K  , KC_X   ,                                                   KC_B   , KC_M    , KC_W    , KC_V    , KC_Z   , KC_NO   ,
 // `--------+---------+---------+---------+-------+--------'                                                 `--------+---------+---------+---------+--------+---------'
-              KC_GRV  , KC_INS  , KC_DOWN , KC_UP ,                                                                     KC_LEFT , KC_RGHT , KC_LBRC, KC_RBRC ,
+              KC_NO   , KC_NO   , KC_NO   , KC_NO ,                                                                     KC_NO   , KC_NO   , KC_NO   , KC_NO  ,
 //          `-------------------------------------'                                                                   `--------------------------------------'
 //                                          ,-------------------.                                        ,--------------------.
-                                              KC_LCTL , KC_LALT ,                                          KC_RGUI , KC_RCTL  ,
+                                              KC_LSFT , KC_NO   ,                                          KC_NO   , KC_RSFT  ,
 //                                ,---------|---------|---------|                                        |---------+----------+---------.
-                                                        KC_HOME ,                                          KC_PGUP ,
+                                                        KC_NO   ,                                          KC_NO   ,
 //                                |         |         |---------|                                        |---------|          |         |
-                                    KC_BSPC , KC_LGUI , KC_END  ,                                          KC_PGDN , KC_ENTER , KC_SPC  ,
+                                    KC_BSPC , LA_NAV  , KC_NO   ,                                          KC_NO   , LA_SYM   , KC_SPC  ,
 //                                |         |         |         |                                        |         |          |         |
 //                                `-----------------------------'                                        `------------------------------'
   ),
+
 };
 // clang-format on
