@@ -23,6 +23,16 @@ enum layers {
 #define OS_RCTL OSM(MOD_RCTL)
 #define OS_RGUI OSM(MOD_RGUI)
 
+// misc
+#define HOME G(KC_LEFT)
+#define END G(KC_RGHT)
+#define FWD G(KC_RBRC)
+#define BACK G(KC_LBRC)
+#define TABL G(S(KC_LBRC))
+#define TABR G(S(KC_RBRC))
+#define SPCL A(G(KC_LEFT))
+#define SPC_R A(G(KC_RGHT))
+
 enum keycodes {
     // Custom oneshot mod implementation with no timers.
     SW_WIN = SAFE_RANGE,
@@ -51,7 +61,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                                ,---------|---------|---------|                                        |---------+----------+---------.
                                                         KC_NO   ,                                          KC_NO   ,
 //                                |         |         |---------|                                        |---------|          |         |
-                                    KC_BSPC , LA_NAV  , KC_NO   ,                                          KC_NO   , LA_SYM   , KC_SPC  ,
+                                    KC_BSPC , LA_NAV  , KC_NO   ,                                          KC_NO   , LA_SYM   , KC_SPC
 //                                |         |         |         |                                        |         |          |         |
 //                                `-----------------------------'                                        `------------------------------'
   ),
@@ -75,7 +85,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                                ,---------|---------|---------|                                        |---------+----------+---------.
                                                         _______ ,                                          _______ ,
 //                                |         |         |---------|                                        |---------|          |         |
-                                    KC_ESC , _______  , _______ ,                                          _______ , _______  , _______ ,
+                                    KC_ESC , _______  , _______ ,                                          _______ , _______  , _______
 //                                |         |         |         |                                        |         |          |         |
 //                                `-----------------------------'                                        `------------------------------'
   ),
@@ -99,7 +109,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                                ,---------|---------|---------|                                        |---------+----------+---------.
                                                         _______ ,                                          _______ ,
 //                                |         |         |---------|                                        |---------|          |         |
-                                    _______ , _______ , _______ ,                                          _______ , _______  , KC_ENT  ,
+                                    _______ , _______ , _______ ,                                          _______ , _______  , KC_ENT
 //                                |         |         |         |                                        |         |          |         |
 //                                `-----------------------------'                                        `------------------------------'
   ),
@@ -123,7 +133,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                                ,---------|---------|---------|                                        |---------+----------+---------.
                                                         _______ ,                                          _______ ,
 //                                |         |         |---------|                                        |---------|          |         |
-                                    _______ , _______ , _______ ,                                          _______ , _______  , _______ ,
+                                    _______ , _______ , _______ ,                                          _______ , _______  , _______
 //                                |         |         |         |                                        |         |          |         |
 //                                `-----------------------------'                                        `------------------------------'
   ),
