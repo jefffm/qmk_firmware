@@ -1,2 +1,2 @@
-SRC += oneshot.c
-SRC += swapper.c
+STENO_ENABLE = yes
+MOUSEKEY_ENABLE = no
