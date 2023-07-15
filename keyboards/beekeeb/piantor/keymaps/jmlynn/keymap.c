@@ -51,14 +51,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         TO(STENO), KC_ESC,  KC_LBRC, KC_LCBR, KC_LPRN, KC_TILD, KC_CIRC, KC_RPRN,  KC_RCBR, KC_RBRC, KC_GRV,  XXXXXXX,
         XXXXXXX, KC_MINS, KC_ASTR, KC_EQL,  KC_UNDS, KC_DLR,  KC_HASH, OS_RSFT, OS_RCTL, OS_RALT,  OS_RGUI, XXXXXXX,
         XXXXXXX, KC_PLUS, KC_PIPE, KC_AT,   KC_SLSH, KC_PERC, XXXXXXX, KC_BSLS,  KC_AMPR, KC_QUES, KC_EXLM, XXXXXXX,
-                                   KC_ESC, _______, _______, _______, _______, _______
+                                   _______, KC_ESC, _______, _______, _______, _______
     ),
 
     [NAV] = LAYOUT_split_3x6_3(
-        TO(STENO), REDO,   SSHOT,    COPY,    PASTE,    CUT,     KC_TAB, KC_HOME, KC_UP,    KC_END,  KC_DEL,  XXXXXXX,
-        XXXXXXX, OS_LGUI, OS_LALT, OS_LCTL, OS_LSFT,  XXXXXXX, KC_CAPS, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, XXXXXXX,
-        XXXXXXX, UNDO,   TAB_NEW,  BACK,    FWD,      TAB_CLS, XXXXXXX, KC_PGDN, KC_PGUP, BACK,    FWD,     XXXXXXX,
-                                   _______, _______, _______, _______, _______, KC_ENT
+        TO(STENO), REDO,   SSHOT,  COPY,     PASTE,    CUT,     KC_TAB,  KC_HOME, KC_UP,   KC_END,  KC_DEL,  XXXXXXX,
+        XXXXXXX, OS_LGUI, OS_LALT, OS_LCTL,  OS_LSFT,  XXXXXXX, CW_TOGG, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, XXXXXXX,
+        XXXXXXX, UNDO,   TAB_NEW,  TAB_PREV, TAB_NEXT, TAB_CLS, XXXXXXX, KC_PGDN, KC_PGUP, BACK,    FWD,     XXXXXXX,
+                                   _______, _______, _______, _______, KC_ENT, _______
 
     ),
 
@@ -66,7 +66,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         TO(STENO), KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    XXXXXXX,
         XXXXXXX, OS_LGUI, OS_LALT, OS_LCTL, OS_LSFT, KC_F11,  KC_F12,  OS_RSFT, OS_RCTL, OS_RALT, OS_RGUI, XXXXXXX,
         XXXXXXX, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  XXXXXXX,
-                                   _______, _______, _______, _______, _______, _______
+                                   _______, KC_ESC, _______, _______, KC_ENT, _______
     ),
 
     [STENO] = LAYOUT_split_3x6_3(
