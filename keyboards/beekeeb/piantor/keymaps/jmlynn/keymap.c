@@ -1,131 +1,87 @@
+#include "keymap_steno.h"
 
-#include "oneshot.h"
-#include "swapper.h"
-
-#define HOME G(KC_LEFT)
-#define END G(KC_RGHT)
-#define FWD G(KC_RBRC)
-#define BACK G(KC_LBRC)
-#define TABL G(S(KC_LBRC))
-#define TABR G(S(KC_RBRC))
-#define SPCL A(G(KC_LEFT))
-#define SPC_R A(G(KC_RGHT))
-#define LA_SYM MO(SYM)
-#define LA_NAV MO(NAV)
+#include QMK_KEYBOARD_H
 
 enum layers {
     DEF,
     SYM,
     NAV,
     NUM,
+    STENO,
 };
 
-enum keycodes {
-    // Custom oneshot mod implementation with no timers.
-    OS_SHFT = SAFE_RANGE,
-    OS_CTRL,
-    OS_ALT,
-    OS_GUI,
+// layers
+#define LA_SYM MO(SYM)
+#define LA_NAV MO(NAV)
 
-    SW_WIN,  // Switch to next window         (cmd-tab)
-    SW_LANG, // Switch to next input language (ctl-spc)
-};
+// oneshot mods
+#define OS_LSFT OSM(MOD_LSFT)
+#define OS_LALT OSM(MOD_LALT)
+#define OS_LCTL OSM(MOD_LCTL)
+#define OS_LGUI OSM(MOD_LGUI)
+#define OS_RSFT OSM(MOD_RSFT)
+#define OS_RALT OSM(MOD_RALT)
+#define OS_RCTL OSM(MOD_RCTL)
+#define OS_RGUI OSM(MOD_RGUI)
+
+// misc
+#define SSHOT SGUI(KC_S)
+#define UNDO C(KC_Z)
+#define REDO C(S(KC_Z))
+#define CUT C(KC_X)
+#define COPY C(KC_C)
+#define PASTE C(KC_V)
+#define TAB_CLS C(KC_W)
+#define TAB_NEW C(KC_T)
+#define TAB_PREV C(S(KC_TAB))
+#define TAB_NEXT C(KC_TAB)
+#define BACK KC_WBAK
+#define FWD KC_WFWD
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [DEF] = LAYOUT_split_3x6_3(
-        XXXXXXX, KC_QUOT,    KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L, XXXXXXX,
-        XXXXXXX, KC_A,       KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S, XXXXXXX,
-        XXXXXXX, KC_SCLN,    KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W, KC_V,  KC_Z, XXXXXXX,
-                        XXXXXXX, KC_BSPC, LA_NAV, LA_SYM, KC_SPC, XXXXXXX
+        TO(STENO), KC_QUOT,    KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L, XXXXXXX,
+        XXXXXXX,   KC_A,       KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S, XXXXXXX,
+        XXXXXXX,   KC_SCLN,    KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, XXXXXXX,
+                                   XXXXXXX, KC_BSPC, LA_NAV, LA_SYM, KC_SPC, XXXXXXX
     ),
 
     [SYM] = LAYOUT_split_3x6_3(
-        XXXXXXX, KC_ESC,  KC_LBRC, KC_LCBR, KC_LPRN, KC_TILD, KC_CIRC, KC_RPRN, KC_RCBR, KC_RBRC, KC_GRV, XXXXXXX,
-        XXXXXXX, KC_MINS, KC_ASTR, KC_EQL,  KC_UNDS, KC_DLR,  KC_HASH, OS_SHFT,  OS_CTRL,  OS_ALT, OS_GUI, XXXXXXX,
-        XXXXXXX, KC_PLUS, KC_PIPE, KC_AT,   KC_SLSH, KC_PERC, XXXXXXX, KC_BSLS, KC_AMPR, KC_QUES, KC_EXLM, XXXXXXX,
-                        _______, _______, _______, _______, _______, _______
+        TO(STENO), KC_ESC,  KC_LBRC, KC_LCBR, KC_LPRN, KC_TILD, KC_CIRC, KC_RPRN,  KC_RCBR, KC_RBRC, KC_GRV,  XXXXXXX,
+        XXXXXXX, KC_MINS, KC_ASTR, KC_EQL,  KC_UNDS, KC_DLR,  KC_HASH, OS_RSFT, OS_RCTL, OS_RALT,  OS_RGUI, XXXXXXX,
+        XXXXXXX, KC_PLUS, KC_PIPE, KC_AT,   KC_SLSH, KC_PERC, XXXXXXX, KC_BSLS,  KC_AMPR, KC_QUES, KC_EXLM, XXXXXXX,
+                                   KC_ESC, _______, _______, _______, _______, _______
     ),
 
     [NAV] = LAYOUT_split_3x6_3(
-        XXXXXXX, KC_TAB,  SW_WIN,  TABL,    TABR,    KC_VOLU, QK_BOOT, HOME,    KC_UP,   END,     KC_DEL, XXXXXXX,
-        XXXXXXX, OS_GUI, OS_ALT, OS_CTRL,  OS_SHFT,  KC_VOLD, KC_CAPS, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, XXXXXXX,
-        XXXXXXX, SPCL,    SPC_R,   BACK,    FWD,     KC_MPLY, XXXXXXX, KC_PGDN, KC_PGUP, SW_LANG, KC_ENT, XXXXXXX,
-        _______, _______, _______, _______, _______, _______
+        TO(STENO), REDO,   SSHOT,    COPY,    PASTE,    CUT,     KC_TAB, KC_HOME, KC_UP,    KC_END,  KC_DEL,  XXXXXXX,
+        XXXXXXX, OS_LGUI, OS_LALT, OS_LCTL, OS_LSFT,  XXXXXXX, KC_CAPS, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, XXXXXXX,
+        XXXXXXX, UNDO,   TAB_NEW,  BACK,    FWD,      TAB_CLS, XXXXXXX, KC_PGDN, KC_PGUP, BACK,    FWD,     XXXXXXX,
+                                   _______, _______, _______, _______, _______, KC_ENT
 
     ),
 
     [NUM] = LAYOUT_split_3x6_3(
-        XXXXXXX, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0, XXXXXXX,
-        XXXXXXX, OS_GUI, OS_ALT, OS_CTRL,  OS_SHFT,  KC_F11,  KC_F12,  OS_SHFT,  OS_CTRL,  OS_ALT, OS_GUI, XXXXXXX,
-        XXXXXXX, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,  KC_F8,   KC_F9,   KC_F10, XXXXXXX,
-                        _______, _______, _______, _______, _______, _______
+        TO(STENO), KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    XXXXXXX,
+        XXXXXXX, OS_LGUI, OS_LALT, OS_LCTL, OS_LSFT, KC_F11,  KC_F12,  OS_RSFT, OS_RCTL, OS_RALT, OS_RGUI, XXXXXXX,
+        XXXXXXX, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  XXXXXXX,
+                                   _______, _______, _______, _______, _______, _______
     ),
+
+    [STENO] = LAYOUT_split_3x6_3(
+        TO(DEF), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        STN_FN,  STN_S1,  STN_TL,  STN_PL,  STN_HL,  STN_ST1,       STN_ST3, STN_FR,  STN_PR,  STN_LR,  STN_TR,  STN_DR,
+        STN_PWR, STN_S2,  STN_KL,  STN_WL,  STN_RL,  STN_ST2,       STN_ST4, STN_RR,  STN_BR,  STN_GR,  STN_SR,  STN_ZR,
+                                   STN_N1,  STN_A,   STN_O,         STN_E,   STN_U,  STN_N7
+    )
 };
 // clang-format on
 
-bool is_oneshot_cancel_key(uint16_t keycode) {
-    switch (keycode) {
-    case LA_SYM:
-    case LA_NAV:
-        return true;
-    default:
-        return false;
-    }
-}
-
-bool is_oneshot_ignored_key(uint16_t keycode) {
-    switch (keycode) {
-    case LA_SYM:
-    case LA_NAV:
-    case KC_LSFT:
-    case OS_SHFT:
-    case OS_CTRL:
-    case OS_ALT:
-    case OS_GUI:
-        return true;
-    default:
-        return false;
-    }
-}
-
-bool sw_win_active = false;
-bool sw_lang_active = false;
-
-oneshot_state os_shft_state = os_up_unqueued;
-oneshot_state os_ctrl_state = os_up_unqueued;
-oneshot_state os_alt_state = os_up_unqueued;
-oneshot_state os_cmd_state = os_up_unqueued;
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    update_swapper(
-        &sw_win_active, KC_LGUI, KC_TAB, SW_WIN,
-        keycode, record
-    );
-    update_swapper(
-        &sw_lang_active, KC_LGUI, KC_SPC, SW_LANG,
-        keycode, record
-    );
-
-    update_oneshot(
-        &os_shft_state, KC_LSFT, OS_SHFT,
-        keycode, record
-    );
-    update_oneshot(
-        &os_ctrl_state, KC_LCTL, OS_CTRL,
-        keycode, record
-    );
-    update_oneshot(
-        &os_alt_state, KC_LALT, OS_ALT,
-        keycode, record
-    );
-    update_oneshot(&os_cmd_state, KC_LGUI, OS_GUI,
-                   keycode, record
-    );
-
-    return true;
-}
-
 layer_state_t layer_state_set_user(layer_state_t state) {
     return update_tri_layer_state(state, SYM, NAV, NUM);
+}
+
+void matrix_init_user(void) {
+    steno_set_mode(STENO_MODE_GEMINI); // or STENO_MODE_BOLT
 }
