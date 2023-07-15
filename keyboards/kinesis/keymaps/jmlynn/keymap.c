@@ -1,7 +1,5 @@
 #include QMK_KEYBOARD_H
 
-#include "swapper.h"
-
 enum layers {
     DEF,
     SYM,
@@ -24,20 +22,18 @@ enum layers {
 #define OS_RGUI OSM(MOD_RGUI)
 
 // misc
-#define HOME G(KC_LEFT)
-#define END G(KC_RGHT)
-#define FWD G(KC_RBRC)
-#define BACK G(KC_LBRC)
-#define TABL G(S(KC_LBRC))
-#define TABR G(S(KC_RBRC))
-#define SPCL A(G(KC_LEFT))
-#define SPC_R A(G(KC_RGHT))
-
-enum keycodes {
-    // Custom oneshot mod implementation with no timers.
-    SW_WIN = SAFE_RANGE,
-    SW_LANG, // Switch to next input language (gui-spc)
-};
+#define SSHOT SGUI(KC_S)
+#define UNDO C(KC_Z)
+#define REDO C(S(KC_Z))
+#define CUT C(KC_X)
+#define COPY C(KC_C)
+#define PASTE C(KC_V)
+#define TAB_CLS C(KC_W)
+#define TAB_NEW C(KC_T)
+#define TAB_PREV C(S(KC_TAB))
+#define TAB_NEXT C(KC_TAB)
+#define BACK KC_WBAK
+#define FWD KC_WFWD
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -96,11 +92,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // |--------+---------+---------+---------+--------+--------+-------------------------------------------------+--------+---------+---------+---------+--------+---------|
     _______ , _______ , _______ , _______ , _______, _______,                                                  _______ , _______ , _______ , _______ , _______, _______ ,
 // |--------+---------+---------+---------+--------+--------|                                                 |--------+---------+---------+---------+--------+---------|
-    _______ , KC_TAB  , SW_WIN  , TABL    , TABR   , KC_VOLU,                                                  XXXXXXX , KC_HOME , KC_UP   , KC_END  , KC_DEL , _______ ,
+    _______ , REDO    , SSHOT   , COPY    , PASTE  , CUT    ,                                                  KC_TAB  , KC_HOME , KC_UP   , KC_END  , KC_DEL , _______ ,
 // |--------+---------+---------+---------+--------+--------|                                                 |--------+---------+---------+---------+--------+---------|
-    _______ , OS_LGUI , OS_LALT , OS_LCTL , OS_LSFT, KC_VOLD,                                                  CW_TOGG , KC_LEFT , KC_DOWN , KC_RIGHT, KC_BSPC, _______ ,
+    _______ , OS_LGUI , OS_LALT , OS_LCTL , OS_LSFT, XXXXXXX,                                                  CW_TOGG , KC_LEFT , KC_DOWN , KC_RIGHT, KC_BSPC, _______ ,
 // |--------+---------+---------+---------+--------+--------|                                                 |--------+---------+---------+---------+--------+---------|
-    _______ , SPCL    , SPC_R   , BACK    , FWD    , KC_MPLY,                                                  XXXXXXX , KC_PGDN , KC_PGUP , SW_LANG , KC_ENT , _______ ,
+    _______ , UNDO    , TAB_NEW , TAB_PREV,TAB_NEXT, TAB_CLS,                                                  XXXXXXX , KC_PGDN , KC_PGUP , BACK    , FWD    , _______ ,
 // `--------+---------+---------+---------+--------+--------'                                                 `--------+---------+---------+---------+--------+---------'
               _______ , _______ , _______ , _______,                                                                     _______ , _______ , _______ , _______,
 //          `--------------------------------------'                                                                   `--------------------------------------'
