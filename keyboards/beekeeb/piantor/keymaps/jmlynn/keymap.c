@@ -33,7 +33,6 @@ enum layers {
 #define PASTE C(KC_V)
 #define TAB_CLS C(KC_W)
 #define TAB_NEW C(KC_T)
-
 #define TAB_PREV C(S(KC_TAB))
 #define TAB_NEXT C(KC_TAB)
 #define BACK KC_WBAK
@@ -43,7 +42,8 @@ const uint16_t PROGMEM shift_combo_left[]  = {KC_U, KC_I, COMBO_END};
 const uint16_t PROGMEM shift_combo_right[] = {KC_D, KC_H, COMBO_END};
 
 combo_t key_combos[] = {
-    COMBO(shift_combo_left, OS_LSFT), COMBO(shift_combo_right, OS_RSFT), // keycodes with modifiers are possible too!
+    COMBO(shift_combo_left, OS_LSFT),
+    COMBO(shift_combo_right, OS_RSFT),
 };
 
 // clang-format off
@@ -78,7 +78,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [STENO] = LAYOUT_split_3x6_3(
-        TO(DEF), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TO(DEF)
         STN_FN,  STN_S1,  STN_TL,  STN_PL,  STN_HL,  STN_ST1,       STN_ST3, STN_FR,  STN_PR,  STN_LR,  STN_TR,  STN_DR,
         STN_PWR, STN_S2,  STN_KL,  STN_WL,  STN_RL,  STN_ST2,       STN_ST4, STN_RR,  STN_BR,  STN_GR,  STN_SR,  STN_ZR,
                                    STN_N1,  STN_A,   STN_O,         STN_E,   STN_U,  STN_N7
