@@ -33,10 +33,18 @@ enum layers {
 #define PASTE C(KC_V)
 #define TAB_CLS C(KC_W)
 #define TAB_NEW C(KC_T)
+
 #define TAB_PREV C(S(KC_TAB))
 #define TAB_NEXT C(KC_TAB)
 #define BACK KC_WBAK
 #define FWD KC_WFWD
+
+const uint16_t PROGMEM shift_combo_left[]  = {KC_U, KC_I, COMBO_END};
+const uint16_t PROGMEM shift_combo_right[] = {KC_D, KC_H, COMBO_END};
+
+combo_t key_combos[] = {
+    COMBO(shift_combo_left, OS_LSFT), COMBO(shift_combo_right, OS_RSFT), // keycodes with modifiers are possible too!
+};
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
