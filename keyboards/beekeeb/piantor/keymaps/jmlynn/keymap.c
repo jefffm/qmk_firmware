@@ -38,14 +38,6 @@ enum layers {
 #define BACK KC_WBAK
 #define FWD KC_WFWD
 
-const uint16_t PROGMEM shift_combo_left[]  = {KC_U, KC_I, COMBO_END};
-const uint16_t PROGMEM shift_combo_right[] = {KC_D, KC_H, COMBO_END};
-
-combo_t key_combos[] = {
-    COMBO(shift_combo_left, OS_LSFT),
-    COMBO(shift_combo_right, OS_RSFT),
-};
-
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [DEF] = LAYOUT_split_3x6_3(
