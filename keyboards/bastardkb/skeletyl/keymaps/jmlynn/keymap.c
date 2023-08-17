@@ -35,6 +35,8 @@ enum layers {
 #define BACK KC_WBAK
 #define FWD KC_WFWD
 
+enum custom_keycodes { KC_HACKPIPE = SAFE_RANGE };
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [DEF] = LAYOUT_split_3x5_3(
@@ -55,7 +57,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┤  ├────────┼────────┼────────┼────────┼────────┤
      KC_MINS ,KC_ASTR ,KC_EQL  ,KC_UNDS ,KC_DLR  ,   KC_HASH ,OS_RSFT ,OS_RCTL ,OS_RALT ,OS_RGUI ,
   //├────────┼────────┼────────┼────────┼────────┤  ├────────┼────────┼────────┼────────┼────────┤
-     KC_PLUS ,KC_PIPE , KC_AT  , KC_SLSH, KC_PERC,   XXXXXXX ,KC_BSLS ,KC_AMPR ,KC_QUES ,KC_EXLM ,
+     KC_PLUS ,KC_PIPE , KC_AT  , KC_SLSH, KC_PERC,   KC_HACKPIPE ,KC_BSLS ,KC_AMPR ,KC_QUES ,KC_EXLM ,
   //└────────┴────────┼────────┼────────┼────────┤  ├────────┼────────┼────────┼────────┴────────┘
                         _______, KC_ESC , _______,   _______ ,_______ ,_______
   //                  └────────┴────────┴────────┘  └────────┴────────┴────────┘
@@ -89,4 +91,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 layer_state_t layer_state_set_user(layer_state_t state) {
     return update_tri_layer_state(state, SYM, NAV, NUM);
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t* record) {
+    switch (keycode) {
+        case KC_HACKPIPE:
+            if (record->event.pressed) {
+                SEND_STRING("|>");
+            }
+            return false;
+    }
+
+    return true;
 }
